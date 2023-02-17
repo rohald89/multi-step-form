@@ -7,6 +7,9 @@ module.exports = {
         'desktop-nav': 'url(./images/bg-sidebar-desktop.svg)',
         'mobile-nav': 'url(./images/bg-sidebar-mobile.svg)',
       },
+      borderWidth: {
+        1: '1px',
+      },
       borderRadius: {
         'wrapper-lg': '15px',
         'wrapper-md': '10px',
