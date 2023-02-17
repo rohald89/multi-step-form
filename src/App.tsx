@@ -1,5 +1,17 @@
+import Container from './components/Container'
+import StepNavigation from './components/StepNavigation'
+
 function App() {
-  return <h1 className=''>Hello World</h1>
+  return (
+    <div className='relative grid min-h-screen place-items-center bg-[#EFF5FF]'>
+      <Container>
+        <StepNavigation />
+        <section className=''>
+          <h1 className='text-3xl'>Personal info</h1>
+        </section>
+      </Container>
+    </div>
+  )
 }
 
 export default App
