@@ -4,7 +4,7 @@ function StepLink({ step, active }: { step: { id: number; title: string }; activ
       <div
         className={`${
           active ? 'bg-blue-200 text-[#022959]' : 'border-1 border-white'
-        } grid h-8 w-8 place-items-center rounded-full `}
+        } grid h-8 w-8 place-items-center rounded-full font-bold `}
       >
         {step.id}
       </div>

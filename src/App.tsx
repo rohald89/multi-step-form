@@ -4,7 +4,7 @@ import Container from './components/Container'
 import InfoForm from './components/InfoForm'
 import Navigation from './components/Navigation'
 import PlanForm from './components/PlanForm'
-import StepNavigation from './components/StepNavigation'
+import Sidebar from './components/Sidebar'
 import SummaryForm from './components/SummaryForm'
 import { useMultiStep } from './hooks/useMultiStep'
 
@@ -67,10 +67,10 @@ function App() {
   }
 
   return (
-    <div className='relative grid min-h-screen place-items-center bg-[#EFF5FF]'>
+    <div className='relative min-h-screen bg-[#EFF5FF] bg-mobile-nav bg-contain bg-no-repeat pt-24 md:grid md:place-items-center md:bg-none md:pt-0'>
       <Container>
-        <StepNavigation />
-        <div className='mx-auto flex flex-col justify-between md:w-11/12 md:max-w-[450px]'>
+        <Sidebar currentStepIndex={currentStepIndex} />
+        <div className='flex flex-col justify-between md:w-11/12 md:max-w-[450px]'>
           <form className='' onSubmit={handleSubmit}>
             {step}
           </form>

@@ -2,6 +2,9 @@
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    fontFamily: {
+      sans: ['Ubuntu', 'sans-serif'],
+    },
     extend: {
       backgroundImage: {
         'desktop-nav': 'url(./images/bg-sidebar-desktop.svg)',
@@ -15,7 +18,7 @@ module.exports = {
         'wrapper-md': '10px',
       },
       boxShadow: {
-        wrapper: '0 25px 40px -20px rgba(0, 0, 0, 0.095)',
+        main: '0 25px 40px -20px rgba(0, 0, 0, 0.095)',
       },
     },
   },

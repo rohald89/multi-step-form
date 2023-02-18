@@ -58,6 +58,44 @@ function PlanForm({ plan, billingCycle, updateFields }: PlanFormProps) {
           />
         ))}
       </ul>
+
+      <div className='rounded-lg bg-[#F8F9FF] py-4'>
+        {/* Toggle billing Cycle */}
+        <div className='flex items-center justify-center gap-6'>
+          <button
+            className={`cursor-pointer text-sm font-semibold
+            ${billingCycle === 'monthly' ? 'text-[#022959]' : 'text-[#9699AA]'}`}
+            onClick={() => updateFields({ billingCycle: 'monthly' })}
+          >
+            Monthly
+          </button>
+          <label
+            htmlFor='default-toggle'
+            className='relative inline-flex h-7 w-12 cursor-pointer items-center rounded-full bg-[#022959]'
+          >
+            <input
+              type='checkbox'
+              value=''
+              id='default-toggle'
+              className='peer sr-only'
+              onChange={(e) =>
+                updateFields({
+                  billingCycle: e.target.checked ? 'yearly' : 'monthly',
+                })
+              }
+              checked={billingCycle === 'yearly'}
+            />
+            <div className="peer h-5 w-10 rounded-full after:absolute after:top-[7px] after:left-[7px] after:h-3.5 after:w-3.5 after:rounded-full after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-5"></div>
+          </label>
+          <button
+            className={`cursor-pointer text-sm font-semibold
+            ${billingCycle === 'yearly' ? 'text-[#022959]' : 'text-[#9699AA]'}`}
+            onClick={() => updateFields({ billingCycle: 'yearly' })}
+          >
+            Yearly
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
