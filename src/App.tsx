@@ -33,10 +33,10 @@ function App() {
   const [data, setData] = useState<FormData>(INITIAL_FORM_DATA)
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } = useMultiStep([
-    <InfoForm {...data} updateFields={handleInputChange} />,
-    <PlanForm {...data} updateFields={setData} />,
-    <AddonForm {...data} updateFields={setData} />,
-    <SummaryForm {...data} updateFields={setData} />,
+    <InfoForm key={1} {...data} updateFields={handleInputChange} />,
+    <PlanForm key={2} {...data} updateFields={setData} />,
+    <AddonForm key={3} {...data} updateFields={setData} />,
+    <SummaryForm key={4} {...data} updateFields={setData} />,
   ])
 
   function handleInputChange(fields: Partial<FormData>) {
@@ -54,10 +54,10 @@ function App() {
   //     }
   //   }
 
-  //   const handleCycleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     const { value } = e.target
-  //     setData({ ...data, billingCycle: value as 'monthly' | 'yearly' })
-  //   }
+  function handleCycleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { value } = e.target
+    setData({ ...data, billingCycle: value as 'monthly' | 'yearly' })
+  }
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()

@@ -10,11 +10,13 @@ type InfoFormProps = UserInfo & {
 
 function InfoForm({ name, email, phone, updateFields }: InfoFormProps) {
   return (
-    <div className='flex flex-col gap-4 text-[#022959] md:mt-14'>
-      <h1 className='text-3xl font-bold text-[#022959]'>Personal Info</h1>
-      <p className='text-base text-[#9699AA]'>
-        Please provide your name, email address, and phone number.
-      </p>
+    <div className='flex flex-col gap-6 text-[#022959] md:mt-14'>
+      <div className='flex flex-col gap-3 md:mb-4'>
+        <h1 className='text-3xl font-bold text-[#022959]'>Personal Info</h1>
+        <p className='text-base text-[#9699AA]'>
+          Please provide your name, email address, and phone number.
+        </p>
+      </div>
       <label htmlFor='name' className='flex flex-col gap-2'>
         <span className=''>Name</span>
         <input
