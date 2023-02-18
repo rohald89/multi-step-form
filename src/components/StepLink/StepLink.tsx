@@ -1,5 +1,4 @@
 function StepLink({ step, active }: { step: { id: number; title: string }; active: boolean }) {
-  console.log(step)
   return (
     <div className='flex items-center gap-4 text-white'>
       <div

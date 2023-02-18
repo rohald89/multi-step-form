@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react'
 import AddonForm from './components/AddonForm'
 import Container from './components/Container'
 import InfoForm from './components/InfoForm'
+import Navigation from './components/Navigation'
 import PlanForm from './components/PlanForm'
 import StepNavigation from './components/StepNavigation'
 import SummaryForm from './components/SummaryForm'
@@ -24,7 +25,7 @@ const INITIAL_FORM_DATA: FormData = {
   email: '',
   phone: '',
   plan: 'arcade',
-  billingCycle: 'monthly',
+  billingCycle: 'yearly',
   addons: [],
   submitted: false,
 }
@@ -34,12 +35,13 @@ function App() {
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } = useMultiStep([
     <InfoForm key={1} {...data} updateFields={handleInputChange} />,
-    <PlanForm key={2} {...data} updateFields={setData} />,
+    <PlanForm key={2} {...data} updateFields={handleInputChange} />,
     <AddonForm key={3} {...data} updateFields={setData} />,
     <SummaryForm key={4} {...data} updateFields={setData} />,
   ])
 
   function handleInputChange(fields: Partial<FormData>) {
+    console.log(fields)
     setData((prev) => {
       return { ...prev, ...fields }
     })
@@ -68,7 +70,12 @@ function App() {
     <div className='relative grid min-h-screen place-items-center bg-[#EFF5FF]'>
       <Container>
         <StepNavigation />
-        <form onSubmit={handleSubmit}>{step}</form>
+        <div className='mx-auto flex flex-col justify-between md:w-11/12 md:max-w-[450px]'>
+          <form className='' onSubmit={handleSubmit}>
+            {step}
+          </form>
+          <Navigation back={back} next={next} isFirstStep={isFirstStep} isLastStep={isLastStep} />
+        </div>
       </Container>
     </div>
   )

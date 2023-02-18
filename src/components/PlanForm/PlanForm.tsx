@@ -1,4 +1,9 @@
-type PlanInfo = {
+import Advanced from '../icons/Advanced'
+import Arcade from '../icons/Arcade'
+import Pro from '../icons/Pro'
+import Plan from '../Plan/Plan'
+
+export type PlanInfo = {
   plan: 'arcade' | 'advanced' | 'pro'
   billingCycle: 'monthly' | 'yearly'
 }
@@ -6,6 +11,27 @@ type PlanInfo = {
 type PlanFormProps = PlanInfo & {
   updateFields: (fields: Partial<PlanInfo>) => void
 }
+
+const PLANS = [
+  {
+    id: 123,
+    name: 'arcade',
+    price: 9,
+    icon: <Arcade />,
+  },
+  {
+    id: 234,
+    name: 'advanced',
+    price: 12,
+    icon: <Advanced />,
+  },
+  {
+    id: 345,
+    name: 'pro',
+    price: 15,
+    icon: <Pro />,
+  },
+]
 
 function PlanForm({ plan, billingCycle, updateFields }: PlanFormProps) {
   return (
@@ -20,91 +46,18 @@ function PlanForm({ plan, billingCycle, updateFields }: PlanFormProps) {
       {/* Radio buttons for plan selection  */}
 
       <ul className='grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-4'>
-        <li>
-          <input
-            className='peer hidden'
-            type='radio'
-            name='plan'
-            id='arcade'
-            value='arcade'
-            checked={plan === 'arcade'}
-            onChange={(e) => updateFields({ plan: e.target.value as PlanInfo['plan'] })}
+        {PLANS.map(({ id, name, price, icon }) => (
+          <Plan
+            key={id}
+            name={name}
+            price={price as 9 | 12 | 15}
+            icon={icon}
+            selected={plan === name}
+            billingCycle={billingCycle}
+            updateFields={updateFields}
           />
-          <label
-            htmlFor='arcade'
-            className='flex cursor-pointer flex-col rounded-lg border-1 border-[#D6D9E6] p-4 hover:border-[#483EFF] peer-checked:border-[#483EFF] peer-checked:bg-[#F8F9FF]'
-          >
-            <span className='text-base font-bold'>Arcade</span>
-            <span className='text-sm text-[#9699AA]'>$9/mo</span>
-          </label>
-        </li>
-        <li>
-          <input
-            className='peer hidden'
-            type='radio'
-            name='plan'
-            id='advanced'
-            value='advanced'
-            checked={plan === 'advanced'}
-            onChange={(e) => updateFields({ plan: e.target.value as PlanInfo['plan'] })}
-          />
-          <label
-            htmlFor='advanced'
-            className='flex cursor-pointer flex-col rounded-lg border-1 border-[#D6D9E6] p-4 hover:border-[#483EFF] peer-checked:border-[#483EFF] peer-checked:bg-[#F8F9FF]'
-          >
-            <span className='text-base font-bold'>Advanced</span>
-            <span className='text-sm text-[#9699AA]'>$12/mo</span>
-          </label>
-        </li>
-        <li>
-          <input
-            className='peer hidden'
-            type='radio'
-            name='plan'
-            id='pro'
-            value='pro'
-            checked={plan === 'pro'}
-            onChange={(e) => updateFields({ plan: e.target.value as PlanInfo['plan'] })}
-          />
-          <label
-            htmlFor='pro'
-            className='flex cursor-pointer flex-col rounded-lg border-1 border-[#D6D9E6] p-4 hover:border-[#483EFF] peer-checked:border-[#483EFF] peer-checked:bg-[#F8F9FF]'
-          >
-            <span className='text-base font-bold'>Pro</span>
-            <span className='text-sm text-[#9699AA]'>$15/mo</span>
-          </label>
-        </li>
+        ))}
       </ul>
-      {/* <div className='flex flex-col gap-4'>
-        <div className='flex items-center gap-4'>
-          <input
-            type='radio'
-            name='plan'
-            id='arcade'
-            value='arcade'
-            checked={plan === 'arcade'}
-            onChange={(e) => updateFields({ plan: e.target.value as PlanInfo['plan'] })}
-          />
-          <label htmlFor='arcade' className='flex flex-col gap-2'>
-            <span className='text-base font-bold'>Arcade</span>
-            <span className='text-sm text-[#9699AA]'>For small teams or freelancers</span>
-          </label>
-        </div>
-        <div className='flex items-center gap-4'>
-          <input
-            type='radio'
-            name='plan'
-            id='advanced'
-            value='advanced'
-            checked={plan === 'advanced'}
-            onChange={(e) => updateFields({ plan: e.target.value as PlanInfo['plan'] })}
-          />
-          <label htmlFor='advanced' className='flex flex-col gap-2'>
-            <span className='text-base font-bold'>Advanced</span>
-            <span className='text-sm text-[#9699AA]'>For growing teams or small businesses</span>
-          </label>
-        </div>
-      </div> */}
     </div>
   )
 }
