@@ -8,7 +8,7 @@ import Sidebar from './components/Sidebar'
 import SummaryForm from './components/SummaryForm'
 import { useMultiStep } from './hooks/useMultiStep'
 
-type addon = 'service' | 'storage' | 'profile'
+export type addon = 'service' | 'storage' | 'profile'
 
 type FormData = {
   name: string
@@ -36,7 +36,7 @@ function App() {
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } = useMultiStep([
     <InfoForm key={1} {...data} updateFields={handleInputChange} />,
     <PlanForm key={2} {...data} updateFields={handleInputChange} />,
-    <AddonForm key={3} {...data} updateFields={setData} />,
+    <AddonForm key={3} {...data} updateFields={handleCheckboxChange} />,
     <SummaryForm key={4} {...data} updateFields={setData} />,
   ])
 
@@ -47,18 +47,16 @@ function App() {
     })
   }
 
-  //   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     const { name, checked } = e.target
-  //     if (checked) {
-  //       setData({ ...data, addons: [...data.addons, name as addon] })
-  //     } else {
-  //       setData({ ...data, addons: data.addons.filter((addon) => addon !== name) })
-  //     }
-  //   }
-
-  function handleCycleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { value } = e.target
-    setData({ ...data, billingCycle: value as 'monthly' | 'yearly' })
+  function handleCheckboxChange(addon: addon) {
+    console.log(addon)
+    setData((prev) => {
+      return {
+        ...prev,
+        addons: prev.addons.includes(addon)
+          ? prev.addons.filter((a) => a !== addon)
+          : [...prev.addons, addon],
+      }
+    })
   }
 
   const handleSubmit = (e: FormEvent) => {

@@ -1,4 +1,4 @@
-import StepLink from '../StepLink'
+import StepLink from './StepLink'
 
 function StepNavigation({ currentStepIndex }: { currentStepIndex: number }) {
   const steps = [

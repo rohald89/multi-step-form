@@ -9,6 +9,7 @@ module.exports = {
       backgroundImage: {
         'desktop-nav': 'url(./images/bg-sidebar-desktop.svg)',
         'mobile-nav': 'url(./images/bg-sidebar-mobile.svg)',
+        check: 'url(./images/icon-checkmark.svg)',
       },
       borderWidth: {
         1: '1px',

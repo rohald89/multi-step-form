@@ -1,7 +1,7 @@
 import Advanced from '../icons/Advanced'
 import Arcade from '../icons/Arcade'
 import Pro from '../icons/Pro'
-import Plan from '../Plan/Plan'
+import Plan from './Plan'
 
 export type PlanInfo = {
   plan: 'arcade' | 'advanced' | 'pro'

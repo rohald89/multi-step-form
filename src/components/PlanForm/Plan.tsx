@@ -1,5 +1,5 @@
 import { formatPrice } from '../../utils'
-import { type PlanInfo } from '../PlanForm'
+import { type PlanInfo } from '.'
 
 type PlanProps = {
   name: string
