@@ -41,6 +41,23 @@ function SummaryForm({ plan, billingCycle, addons, change, submitted }) {
           })}
         </ul>
       </section>
+      <div>
+        <p className='flex justify-between px-6 text-sm'>
+          <span className='text-[#9699AA]'>
+            Total (per {billingCycle === 'monthly' ? 'month' : 'year'})
+          </span>
+          <span className='text-lg font-bold text-[#483EFF]'>
+            {formatPrice(
+              chosenPlan.monthlyPrice +
+                addons.reduce((acc, addon) => {
+                  const addonDetails = products.addons.filter((a) => a.type === addon)[0]
+                  return acc + addonDetails.monthlyPrice
+                }, 0),
+              billingCycle,
+            )}
+          </span>
+        </p>
+      </div>
     </div>
   )
 }
