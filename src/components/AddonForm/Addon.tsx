@@ -2,6 +2,7 @@ import { type addon } from '../../App'
 import { formatPrice } from '../../utils'
 
 type AddonProps = {
+  selected: boolean
   addon: {
     id: number
     type: addon
@@ -13,7 +14,7 @@ type AddonProps = {
   updateFields: (addon: addon) => void
 }
 
-function Addon({ addon, billingCycle, updateFields }: AddonProps) {
+function Addon({ selected, addon, billingCycle, updateFields }: AddonProps) {
   return (
     <li>
       <label htmlFor={addon.type} className='addon flex items-center gap-4'>
@@ -26,6 +27,7 @@ function Addon({ addon, billingCycle, updateFields }: AddonProps) {
           onChange={(e) => {
             updateFields(e.target.name as addon)
           }}
+          checked={selected}
         />
         <div className='space-y-1'>
           <h2 className='text-base'>{addon.name}</h2>

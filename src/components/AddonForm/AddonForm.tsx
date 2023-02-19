@@ -7,6 +7,7 @@ export type AddonInfo = {
 }
 
 type AddonFormProps = {
+  addons: addon[]
   billingCycle: 'monthly' | 'yearly'
   updateFields: (addon: addon) => void
 }
@@ -35,7 +36,7 @@ const ADDONS = [
   },
 ]
 
-function AddonForm({ billingCycle, updateFields }: AddonFormProps) {
+function AddonForm({ addons, billingCycle, updateFields }: AddonFormProps) {
   return (
     <div className='flex flex-col gap-6 text-[#022959] md:mt-14'>
       <div className='flex flex-col gap-3 md:mb-4'>
@@ -49,6 +50,7 @@ function AddonForm({ billingCycle, updateFields }: AddonFormProps) {
             addon={addon}
             billingCycle={billingCycle}
             updateFields={updateFields}
+            selected={addons.includes(addon.type)}
           />
         ))}
       </ul>
