@@ -33,18 +33,24 @@ const INITIAL_FORM_DATA: FormData = {
 function App() {
   const [data, setData] = useState<FormData>(INITIAL_FORM_DATA)
 
-  const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } = useMultiStep([
-    <InfoForm key={1} {...data} updateFields={handleInputChange} />,
-    <PlanForm key={2} {...data} updateFields={handleInputChange} />,
-    <AddonForm key={3} {...data} updateFields={handleCheckboxChange} />,
-    <SummaryForm key={4} {...data} updateFields={setData} />,
-  ])
+  const { steps, currentStepIndex, step, isFirstStep, isLastStep, goTo, back, next } = useMultiStep(
+    [
+      <InfoForm key={1} {...data} updateFields={handleInputChange} />,
+      <PlanForm key={2} {...data} updateFields={handleInputChange} />,
+      <AddonForm key={3} {...data} updateFields={handleCheckboxChange} />,
+      <SummaryForm key={4} {...data} change={handleChangePlan} submitted={data.submitted} />,
+    ],
+  )
 
   function handleInputChange(fields: Partial<FormData>) {
     console.log(fields)
     setData((prev) => {
       return { ...prev, ...fields }
     })
+  }
+
+  function handleChangePlan() {
+    goTo(1)
   }
 
   function handleCheckboxChange(addon: addon) {
@@ -68,12 +74,19 @@ function App() {
     <div className='relative min-h-screen bg-[#EFF5FF] bg-mobile-nav bg-contain bg-no-repeat pt-24 md:grid md:place-items-center md:bg-none md:pt-0'>
       <Container>
         <Sidebar currentStepIndex={currentStepIndex} />
-        <div className='flex flex-col justify-between md:w-11/12 md:max-w-[450px]'>
-          <form className='' onSubmit={handleSubmit}>
-            {step}
-          </form>
-          <Navigation back={back} next={next} isFirstStep={isFirstStep} isLastStep={isLastStep} />
-        </div>
+        <form
+          onSubmit={handleSubmit}
+          className='flex flex-col justify-center md:w-11/12 md:max-w-[450px]'
+        >
+          {step}
+          <Navigation
+            back={back}
+            next={next}
+            isFirstStep={isFirstStep}
+            isLastStep={isLastStep}
+            submitted={data.submitted}
+          />
+        </form>
       </Container>
     </div>
   )
