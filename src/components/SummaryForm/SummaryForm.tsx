@@ -1,8 +1,17 @@
 import products from '../../products'
 import { formatPrice } from '../../utils'
 import Confirmation from './Confirmation'
+import { addon } from '../../App'
 
-function SummaryForm({ plan, billingCycle, addons, change, submitted }) {
+type SummaryFormProps = {
+  plan: 'arcade' | 'advanced' | 'pro'
+  billingCycle: 'monthly' | 'yearly'
+  addons: addon[]
+  change: () => void
+  submitted: boolean
+}
+
+function SummaryForm({ plan, billingCycle, addons, change, submitted }: SummaryFormProps) {
   const chosenPlan = products.plans.filter((p) => p.name === plan)[0]
   console.log(addons)
   if (submitted) return <Confirmation />
